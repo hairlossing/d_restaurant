@@ -1,0 +1,14 @@
+<!--miniprogram/pages/index/infood/infood.wxml-->
+<view class="container">
+
+     <view  class="title" >请选择座位号</view>
+      <picker  class="picker"  name="seat" bindchange="bindPickerChange" value="{{index}}" range="{{array}}" >
+        <view class='orderset'>
+          {{array[index]}}
+        </view>
+      </picker>
+      <view class="confirm">
+          <button class="do" bindtap="do">确认</button>
+          <button class="undo" bindtap="undo">返回</button>
+      </view>
+</view>
