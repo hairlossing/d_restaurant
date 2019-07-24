@@ -282,7 +282,7 @@ Page({
     // console.log(food);
     // this.setData({ form_id: e.detail.formId });
     // this.Formid();
-    // this.Orderform();
+     this.Orderform();
     // this.Addsold();
     this.createCode();
     wx.navigateTo({
