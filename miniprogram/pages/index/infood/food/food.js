@@ -276,7 +276,7 @@ Page({
     console.log(this.data.code)
   },
   addsubmit(e) {
-   
+    //this.Orderform();
     this.createCode();
     wx.navigateTo({
       url: './sucess/sucess?cart=' + JSON.stringify(this.data.cart),
