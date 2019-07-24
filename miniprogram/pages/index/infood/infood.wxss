@@ -1,0 +1,41 @@
+page{
+  background-color: white;
+  
+}
+.container
+{
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+}
+.title{
+  
+  margin-top: 150rpx;
+}
+.picker
+{
+
+  margin-top: 100rpx;
+  width: 200rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  border: 1px solid #e4584b;
+  border-radius: 20rpx;
+}
+.confirm{
+  width: 400rpx;
+  height: 100rpx;
+  margin-top: 100rpx;
+}
+.do{
+  background-color: #e4584b;
+  float: right;
+  border-radius: 30rpx;
+}
+.undo{
+   background-color: #e4584b;
+  float: left;
+    border-radius: 30rpx;
+
+}
