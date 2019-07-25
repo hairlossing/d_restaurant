@@ -15,16 +15,13 @@ exports.main = async (event, context) => {
           value: event.number
         },
         keyword3: {
-          value: event.minute
-        },
-        keyword4: {
           value: event.num
         },
-        keyword5: {
+        keyword4: {
           value: event.tips
         }
       },
-      templateId: 'in76sbPrtRSw8SvTR3ShtKv0YG_U4Kj7ponVmgipqfM',
+      templateId: 'tx6Q91J2cL53M6Mna02HecoCRdPrmKIei9soYKPvVO8',
       formId: formid,
       // emphasisKeyword: 'keyword1.DATA'
     })

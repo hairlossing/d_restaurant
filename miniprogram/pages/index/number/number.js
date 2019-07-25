@@ -16,7 +16,7 @@ Page({
     wx.showLoading({
       title: '请稍后',
     })
-    var num= this.data.anumber+1
+    var num = this.data.anumber + 1
     console.log('a0' + num)
     wx.cloud.callFunction({
       // 需调用的云函数名
@@ -25,7 +25,7 @@ Page({
       data: {
         name: 'D餐厅',
         number: 'a0' + num,//排号
-        num: this.data.little +1,//目前排队的桌数
+        num: this.data.little + 1,//目前排队的桌数
         tips: "欢迎来到，膳食备好我们会通知您哦！",
         formid: e.detail.formId,
         userid: app.globalData.openid
@@ -46,22 +46,28 @@ Page({
             console.log("插入失败", err)
           }
         })
-        db.collection('Lodge').doc('peoplenum').update({
-          data: {//这一段需放管理端运行
-            anum: this.data.little + 1,
-            anumber: this.data.anumber + 1,
+
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'lodge',
+          // 传给云函数的参数
+          data: {
+            a: this.data.little + 1,
+            b:this.data.anumber + 1,
           },
-          success: res => {
-            console.log("修改成功",res)
+        })
+          .then(res => {
+            console.log(res.result) // 3
             wx.showToast({
               title: '成功',
             })
-            //this.onShow()
-          },
-          fail: err => {
-            console.log(err)
-          }
-        })
+          })
+          .catch(console.error)
+
+      
+
+
+
       }
     })
   },
@@ -69,13 +75,14 @@ Page({
     wx.showLoading({
       title: '请稍后',
     })
+    var num = this.data.bnumber + 1
     wx.cloud.callFunction({
       // 需调用的云函数名
       name: 'shopkeeper',
       // 传给云函数的参数
       data: {
         name: 'D餐厅',
-        number: 'b0' + this.data.bnumber + 1,
+        number: 'b0' + num,
         num: this.data.middle + 1,
         tips: "欢迎来到，膳食备好我们会通知您哦！",
         formid: e.detail.formId,
@@ -86,8 +93,7 @@ Page({
         const db = wx.cloud.database()
         db.collection('line').add({
           data: {
-            _openid: app.globalData.openid,
-            line_num: 'b0' + this.data.bnumber + 1,
+            line_num: 'b0' + num,
             table_type: '5-8'
           },
           success: res => {
@@ -120,6 +126,7 @@ Page({
     wx.showLoading({
       title: '请稍后',
     })
+    var num = this.data.cnumber + 1
     // var num = app.data.huge + 1;
     // app.Numberlittle(num);
     wx.cloud.callFunction({
@@ -128,7 +135,7 @@ Page({
       // 传给云函数的参数
       data: {
         name: 'D餐厅',
-        number: 'c0' + this.data.cnumber + 1,
+        number: 'c0' + num,
         num: this.data.huge + 1,
         tips: "欢迎来到，膳食备好我们会通知您哦！",
         formid: e.detail.formId,
@@ -139,8 +146,7 @@ Page({
         const db = wx.cloud.database()
         db.collection('line').add({
           data: {
-            _openid: app.globalData.openid,
-            line_num: 'c0' + this.data.cnumber + 1,
+            line_num: 'c0' + num,
             table_type: '>8'
           },
           success: res => {

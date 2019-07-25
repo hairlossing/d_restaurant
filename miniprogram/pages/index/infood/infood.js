@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    array: ['A101', 'A102', 'A103', 'B101', 'B102', 'B103', 'C101', 'C102', 'C103'],
+    array: ['A101', 'A102', 'A103', 'B101', 'B102', 'C101',],
     index:0,
   },
 
@@ -73,6 +73,23 @@ Page({
   },
   do:function()
   {
+    console.log(this.data.array[this.data.index])
+
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'orderform',
+      // 传给云函数的参数
+      data: {
+        num: this.data.array[this.data.index]
+      },
+    })
+      .then(res => {
+        console.log(res.result) // 3
+      })
+      .catch(console.error)
+
+
+
     wx.navigateTo({
       url: 'food/food',
       success: function(res) {},
