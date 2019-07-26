@@ -5,12 +5,11 @@ const _ = db.command
 exports.main = async (event, context) => {
   try {
     return await db.collection('Lodge').where({
-      _openid: 'ot8X15dx - dOIceUsxIPM_YPdAM78'
+      _id:"peoplenum"
     })
       .update({
         data: {
-          anum:1,
-          anumber:1
+          anum: _.inc(10)
         },
       })
   } catch (e) {
