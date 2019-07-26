@@ -58,48 +58,59 @@ Page({
           success: res => {
             console.log("查询成功")
             for (var i = 0; i < num; i++) {
-              db.collection('seat').doc(res.data[i]._id).update({
+              wx.cloud.callFunction({
+                // 云函数名称
+                name: 'book',
+                // 传给云函数的参数
                 data: {
-                  state: false,
+                  id: res.data[i]._id
                 },
-                success: res => {
-                  console.log("更新成功", res)
-                },
-                fail: err => {
-                  console.error("更新失败", err)
-                }
               })
+                .then(res => {
+                  console.log(res.result) // 3
+                  wx.showToast({
+                    title: '成功',
+                  })
+                })
+                .catch(console.error)
             }
             console.log(i)
-            db.collection('user_book').where({
-              _openid: "ot8X15Zm54bruNW3ZVVG_Ssl8qFI",
-              date: 2,
-              seat_type: e,
-            }).get({
-              success: res => {
-                db.collection('user_book').doc(res.data[0]._id).update({
-                  data: {
-                    date: 1
-                  },
-                  success: res => {
-                    console.log("日期修改成功")
-                  },
-                  fail: err => {
-                    console.log("日期修改失败")
-                  }
+
+//交换日期
+            wx.cloud.callFunction({
+              // 云函数名称
+              name: 'date_change',
+              // 传给云函数的参数
+              data: {
+              },
+            })
+              .then(res => {
+                console.log(res.result) // 3
+                wx.showToast({
+                  title: '成功',
                 })
-                db.collection('user_book').doc(id).update({
-                  data: {
-                    seat_number: 0,
-                    date: 2
-                  },
-                  success: res => {
-                    console.log("日期交换成功")
-                  },
-                  fail: err => {
-                    console.log("日期交换失败")
-                  }
+              })
+              .catch(console.error)
+
+
+            wx.cloud.callFunction({
+              // 云函数名称
+              name: 'date_change2',
+              // 传给云函数的参数
+              data: {
+                id:id,
+              },
+            })
+              .then(res => {
+                console.log(res.result) // 3
+                wx.showToast({
+                  title: '成功',
                 })
+              })
+              .catch(console.error)
+
+
+
               }
             })
           },
@@ -107,8 +118,7 @@ Page({
             console.log("查询失败")
           }
         })
-      }
-    })
+
   },
 
 

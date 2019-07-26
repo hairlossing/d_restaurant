@@ -151,18 +151,22 @@ Page({
             console.log(res.data[0].number)
             tablenum = res.data[0].number
             console.log(tablenum)
-            db.collection('seat').doc(res.data[0]._id).update({
-              // data 传入需要局部更新的数据，这一段需放管理端运行
+            
+            wx.cloud.callFunction({
+              // 云函数名称
+              name: 'book',
+              // 传给云函数的参数
               data: {
-                state: false
+                id:res.data[0]._id
               },
-              success: res => {
-                console.log("更新成功", res)
-              },
-              fail: err => {
-                console.error("更新失败", err)
-              }
             })
+              .then(res => {
+                console.log(res.result) // 3
+                wx.showToast({
+                  title: '成功',
+                })
+              })
+              .catch(console.error)
 
 
             wx.cloud.callFunction({//发送消息模板
@@ -216,20 +220,24 @@ Page({
 
               tablenum = "C" + 101 + res.data[0].seat_number
             }
-            db.collection('user_book').doc(res.data[0]._id).update({
-              // data 传入需要局部更新的数据,这一段需在管理端运行
+            wx.cloud.callFunction({
+              // 云函数名称
+              name: 'user_book',
+              // 传给云函数的参数
               data: {
-                seat_number: res.data[0].seat_number + 1,
+                id: res.data[0]._id,
+                num:res.data[0].seat_number
               },
-              success: res => {
-                console.log("更新成功", res)
-              },
-              fail: err => {
-                console.error("更新失败", err)
-              }
             })
+              .then(res => {
+                console.log(res.result) // 3
+                wx.showToast({
+                  title: '成功',
+                })
+              })
+              .catch(console.error)
 
-
+              
             wx.cloud.callFunction({//发送消息模板
               name: 'seats',
               data: {
