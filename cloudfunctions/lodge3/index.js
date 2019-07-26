@@ -9,8 +9,8 @@ exports.main = async (event, context) => {
     })
       .update({
         data: {
-          anum: event.a,
-          anumber:event.b,
+          cnum: event.a,
+          cnumber: event.b,
         },
       })
   } catch (e) {

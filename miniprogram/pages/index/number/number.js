@@ -3,11 +3,11 @@ const app = getApp();
 Page({
   data: {
     little: 0,//目前排队的桌数
-    littlenum: '',//当前排到的客人
+    littlenum: null,//当前排到的客人
     middle: 0,//
-    middlenum: '',
+    middlenum: null,
     huge: 0,
-    hugenum: '',
+    hugenum: null,
     anumber: 0,//今人总共排队的人数
     bnumber: 0,
     cnumber: 0
@@ -103,22 +103,24 @@ Page({
             console.log("插入失败", err)
           }
         })
-        db.collection('Lodge').doc("peoplenum").update({
+
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'lodge2',
+          // 传给云函数的参数
           data: {
-            bnum: this.data.middle + 1,
-            bnumber: this.data.bnumber + 1,
+            a: this.data.middle+ 1,
+            b: this.data.bnumber + 1,
           },
-          success: function (res) {
-            console.log(res)
+        })
+          .then(res => {
+            console.log(res.result) // 3
             wx.showToast({
               title: '成功',
             })
-            //this.onShow()
-          },
-          fail: res => {
-            console.log(res)
-          }
-        })
+          })
+          .catch(console.error)
+
       }
     })
   },
@@ -156,22 +158,25 @@ Page({
             console.log("插入失败", err)
           }
         })
-        db.collection('Lodge').doc("peoplenum").update({
+        
+
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'lodge3',
+          // 传给云函数的参数
           data: {
-            cnum: this.data.huge + 1,
-            cnumber: this.data.cnumber + 1,
+            a: this.data.huge+ 1,
+            b: this.data.cnumber + 1,
           },
-          success: function (res) {
-            console.log(res)
+        })
+          .then(res => {
+            console.log(res.result) // 3
             wx.showToast({
               title: '成功',
             })
-            //this.onShow()
-          },
-          fail: res => {
-            console.log(res)
-          }
-        })
+          })
+          .catch(console.error)
+
       }
     })
   },
