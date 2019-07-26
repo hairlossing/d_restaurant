@@ -34,8 +34,8 @@
       <label class="labellittle">会员</label>
     </view>
   </view>
-  <view class='view11' bindtap='orderfood'>
-    <view class='view111'>
+  <view class='view11'>
+    <view class='view111' bindtap='orderfood'>
       <image class="img1" src='cloud://little-y6v0c.6c69-little-y6v0c-1259261506/images/7.png' ></image>
       <label class="labellittle">订外卖</label>
     </view>
