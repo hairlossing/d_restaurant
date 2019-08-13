@@ -1,3 +1,4 @@
+const app = getApp()
 Page({
 
   /**
@@ -98,7 +99,9 @@ Page({
       title: '正在查找',
     })
     const db = wx.cloud.database()
-    db.collection('menu')
+    db.collection('menu').where({
+      _openid: app.globalData.openid
+    })
       .get({
         success: res => {
           wx.showToast({

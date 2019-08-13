@@ -2,7 +2,7 @@
 const app = getApp();
 Page({
   data: {
-
+    num:'',
     people: null,
     followed: false,
     goods: {},
@@ -48,6 +48,9 @@ Page({
     form_id: ''
   },
   onLoad: function (options) {
+    this.setData({
+      num: options.seatnum,
+    });
     // var shopId = options.id;
     // for (var i = 0; i < app.globalData.shops.length; ++i) {
     //   if (app.globalData.shops[i].id == shopId) {
@@ -221,7 +224,8 @@ Page({
     const db = wx.cloud.database()
     db.collection('menu').add({
       data: {
-        food: this.data.cart
+        food: this.data.cart,
+        seat_num:this.data.num
       },
       success: res => {
         wx.showToast({
@@ -276,7 +280,7 @@ Page({
     console.log(this.data.code)
   },
   addsubmit(e) {
-    //this.Orderform();
+    this.Orderform();
     this.createCode();
     wx.navigateTo({
       url: './sucess/sucess?cart=' + JSON.stringify(this.data.cart),

@@ -91,7 +91,7 @@ Page({
 
 
     wx.navigateTo({
-      url: 'food/food',
+      url: 'food/food?seatnum='+this.data.array[this.data.index],
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
